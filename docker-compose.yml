@@ -1,0 +1,87 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    hostname: db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: rinha
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - rinha
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 250M
+
+  nginx:
+    image: nginx:latest
+    restart: always
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app1
+      - app2
+    networks:
+      - rinha
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 10M
+
+  app1:
+    image: kauanrocha2003/api:latest
+    ports:
+      - "8001:8080"
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
+    depends_on:
+      - db
+    networks:
+      - rinha
+    deploy:
+      resources:
+        limits:
+          cpus: '0.4'
+          memory: 220M
+
+  app2:
+    image: kauanrocha2003/api:latest
+    ports:
+      - "8002:8080"
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
+    depends_on:
+      - db
+    networks:
+      - rinha
+    deploy:
+      resources:
+        limits:
+          cpus: '0.4'
+          memory: 220M
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    networks:
+      - rinha
+
+networks:
+  rinha:
+    driver: bridge
