@@ -5,6 +5,7 @@ import br.com.rinha.api.payloads.ExtratoResponse;
 import br.com.rinha.api.payloads.TransacaoRequest;
 import br.com.rinha.api.payloads.TransacoesResponse;
 import br.com.rinha.api.services.TransacoesService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class ApiController {
     }
 
     @PostMapping("/clientes/{id}/transacoes")
-    public TransacoesResponse criaTransacao(@PathVariable(name = "id") int clienteId, @RequestBody TransacaoRequest transacaoRequest) {
+    public TransacoesResponse criaTransacao(@PathVariable(name = "id") int clienteId,@RequestBody @Valid TransacaoRequest transacaoRequest) {
         return new TransacoesResponse(transacoesService.criaTransacoes(clienteId, transacaoRequest));
     }
 
