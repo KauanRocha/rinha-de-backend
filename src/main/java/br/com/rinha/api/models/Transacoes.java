@@ -18,13 +18,13 @@ public class Transacoes {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "valor", nullable = false)
-    private Integer valor;
+    @Column(name = "valor")
+    private int valor;
 
-    @Column(name = "tipo", nullable = false)
+    @Column(name = "tipo")
     private boolean tipo;
 
-    @Column(name = "descricao", nullable = false, length = 10)
+    @Column(name = "descricao")
     private String descricao;
 
     @CreatedDate
@@ -32,13 +32,13 @@ public class Transacoes {
     private LocalDateTime realizadaEm;
 
     @Column(name = "cliente_id")
-    private Integer clienteId;
+    private int clienteId;
 
     @Column(name = "saldo")
-    private Integer saldo;
+    private int saldo;
 
     @Column(name = "limite")
-    private Integer limite;
+    private int limite;
 
 
     public Integer getId() {
@@ -49,11 +49,11 @@ public class Transacoes {
         this.id = id;
     }
 
-    public Integer getValor() {
+    public int getValor() {
         return valor;
     }
 
-    public void setValor(Integer valor) {
+    public void setValor(int valor) {
         this.valor = valor;
     }
 
@@ -81,28 +81,28 @@ public class Transacoes {
     public void setRealizadaEm(LocalDateTime realizadaEm) {
         this.realizadaEm = realizadaEm;
     }
-    public Integer getClienteId() {
+    public int getClienteId() {
         return clienteId;
     }
 
-    public void setClienteId(Integer clienteId) {
+    public void setClienteId(int clienteId) {
         this.clienteId = clienteId;
     }
 
 
-    public Integer getLimite() {
+    public int getLimite() {
         return limite;
     }
 
-    public void setLimite(Integer limite) {
+    public void setLimite(int limite) {
         this.limite = limite;
     }
 
-    public Integer getSaldo() {
+    public int getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(Integer saldo) {
+    public void setSaldo(int saldo) {
         this.saldo = saldo;
     }
 

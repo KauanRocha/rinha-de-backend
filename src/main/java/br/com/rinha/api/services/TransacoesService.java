@@ -8,10 +8,13 @@ import br.com.rinha.api.repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class TransacoesService {
+
+    public static int[] ids = {1, 2, 3, 4, 5};
 
     private final TransactionRepository transactionRepository;
 
@@ -20,7 +23,7 @@ public class TransacoesService {
         this.transactionRepository = transactionRepository;
     }
 
-    public Transacoes criaTransacoes(Integer clienteId, TransacaoRequest transacaoRequest) {
+    public Transacoes criaTransacoes(int clienteId, TransacaoRequest transacaoRequest) {
         var ultimaTransacao = transactionRepository.findFirstByClienteIdOrderByIdDesc(clienteId).orElseThrow(NotFoundException::new);
         var novaTransacao = transacaoRequest.builder();
         novaTransacao.setClienteId(ultimaTransacao.getClienteId());
@@ -31,7 +34,7 @@ public class TransacoesService {
 
     }
 
-    public List<Transacoes> buscaExtrato(Integer clienteId) {
+    public List<Transacoes> buscaExtrato(int clienteId) {
         List<Transacoes> ultimasTransacoes = transactionRepository.findFirst10ByClienteIdOrderByIdDesc(clienteId);
         if (ultimasTransacoes.isEmpty()) {
             throw new NotFoundException();

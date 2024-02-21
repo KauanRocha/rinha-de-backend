@@ -19,12 +19,12 @@ public class ApiController {
     }
 
     @PostMapping("/clientes/{id}/transacoes")
-    public TransacoesResponse criaTransacao(@PathVariable(name = "id") Integer clienteId, @RequestBody TransacaoRequest transacaoRequest) {
+    public TransacoesResponse criaTransacao(@PathVariable(name = "id") int clienteId, @RequestBody TransacaoRequest transacaoRequest) {
         return new TransacoesResponse(transacoesService.criaTransacoes(clienteId, transacaoRequest));
     }
 
     @GetMapping("/clientes/{id}/extrato")
-    public ExtratoResponse buscaExtrato(@PathVariable(name = "id") Integer clienteId) {
+    public ExtratoResponse buscaExtrato(@PathVariable(name = "id") int clienteId) {
         return new ExtratoResponse(transacoesService.buscaExtrato(clienteId));
     }
 }

@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TransactionRepository extends JpaRepository<Transacoes, Integer> {
-    Optional<Transacoes> findFirstByClienteIdOrderByIdDesc(Integer clienteId);
+    Optional<Transacoes> findFirstByClienteIdOrderByIdDesc(int clienteId);
 
-    List<Transacoes> findFirst10ByClienteIdOrderByIdDesc(Integer clienteId);
+    List<Transacoes> findFirst10ByClienteIdOrderByIdDesc(int clienteId);
 
 }

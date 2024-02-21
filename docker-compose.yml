@@ -18,8 +18,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: 250M
+          cpus: '0.6'
+          memory: 150M
 
   nginx:
     image: nginx:latest
@@ -36,11 +36,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.2'
+          cpus: '01'
           memory: 10M
 
   app1:
-    image: kauanrocha2003/api:latest
+    build: .
     ports:
       - "8001:8080"
     environment:
@@ -53,10 +53,10 @@ services:
       resources:
         limits:
           cpus: '0.4'
-          memory: 220M
+          memory: 195M
 
   app2:
-    image: kauanrocha2003/api:latest
+    build: .
     ports:
       - "8002:8080"
     environment:
@@ -69,7 +69,7 @@ services:
       resources:
         limits:
           cpus: '0.4'
-          memory: 220M
+          memory: 195M
 
   pgadmin:
     image: dpage/pgadmin4

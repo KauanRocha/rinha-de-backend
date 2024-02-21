@@ -7,14 +7,13 @@ import java.util.List;
 
 public record ExtratoResponse(Saldo saldo, List<Transacao> ultimasTransacoes) {
     public ExtratoResponse(List<Transacoes> transacoes) {
-        this(new Saldo(transacoes.get(0)), transacoes.stream().map(Transacao::new).toList());
+        this(new Saldo(transacoes.get(0)), transacoes.stream().filter(t -> t.getId() > 5).map(Transacao::new).toList());
     }
 }
 
 record Saldo(int total, LocalDateTime dataExtrato, int limite) {
     public Saldo(Transacoes transacao) {
         this(transacao.getSaldo(), LocalDateTime.now(), transacao.getLimite());
-
     }
 }
  record Transacao(int valor, char tipo, String descricao, LocalDateTime realizadaEm) {
